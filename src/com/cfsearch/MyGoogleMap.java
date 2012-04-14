@@ -83,6 +83,8 @@ public class MyGoogleMap extends MapActivity
   
   private static final int MSG_SHOW_MESSAGE = 1;  
   
+  private String TAG = "MyGoogleMap";
+  
   @Override 
   protected void onCreate(Bundle icicle) 
   { 
@@ -100,6 +102,7 @@ public class MyGoogleMap extends MapActivity
     	StoreAddr = bunde.getString("addr");
     	
     	StoreGeoPoint = getGeoByAddress(StoreAddr);
+
     }
     
     mMapView = (MapView)findViewById(R.id.myMapView1); 
@@ -333,20 +336,15 @@ public class MyGoogleMap extends MapActivity
          
         List<Address> lstAddress = mGeocoder01.getFromLocationName
                            (strSearchAddress, 10);
-        if (!lstAddress.isEmpty()) 
-        { 
-          /*for (int i = 0; i < lstAddress.size(); ++i)
-          {
-            Address adsLocation = lstAddress.get(i);
-            //Log.i(TAG, "Address found = " + adsLocation.toString()); 
-            double geoLatitude = adsLocation.getLatitude();
-            double geoLongitude = adsLocation.getLongitude();
-          } */
-          Address adsLocation = lstAddress.get(0); 
-          double geoLatitude = adsLocation.getLatitude()*1E6; 
-          double geoLongitude = adsLocation.getLongitude()*1E6; 
-          gp = new GeoPoint((int) geoLatitude, (int) geoLongitude); 
-        }
+         if (!lstAddress.isEmpty()) 
+         { 
+         
+	         Address adsLocation = lstAddress.get(0); 
+	         double geoLatitude = adsLocation.getLatitude()*1E6; 
+	         double geoLongitude = adsLocation.getLongitude()*1E6; 
+	         gp = new GeoPoint((int) geoLatitude, (int) geoLongitude); 
+	         Log.i(TAG, "FIND IT ADDRESS");
+         }
         
       } 
     } 

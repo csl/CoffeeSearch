@@ -20,7 +20,8 @@
         </activity>
         <activity android:name="StoreList"></activity>
         <activity android:name="StoreView"></activity>            
-        <activity android:name="MyGoogleMap"></activity>            
+        <activity android:name="MyGoogleMap"></activity>      
+        <uses-library android:required="true" android:name="com.google.android.maps" />
         </application>
         
     <uses-permission 

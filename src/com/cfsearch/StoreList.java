@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,6 +29,8 @@ public class StoreList extends Activity {
 	private SQLiteDatabase db;
 	private SQLiteHelper dbHelper;
 	private Cursor cursor;
+	
+	String TAG = "StoreList";
 		
 	
 	public void onCreate(Bundle savedInstanceState) 
@@ -84,7 +87,7 @@ public class StoreList extends Activity {
 		int i=0;
 		ArrayList<HashMap<String, Object>> listitem = new ArrayList<HashMap<String,Object>>();
 
-		ArrayList<store_list> store_list = new ArrayList<store_list>();
+		ArrayList<store_list> cstore_list = new ArrayList<store_list>();
 		
 		  try{
 	          cursor = db.query(SQLiteHelper.TB_NAME, null, null, null, null, null, null);
@@ -104,7 +107,9 @@ public class StoreList extends Activity {
 	          sitem.id = cursor.getString(0);
 	          sitem.name = cursor.getString(1);
 	          sitem.commit = cursor.getString(2);
-	          store_list.add(sitem);
+	          Log.i(TAG, sitem.id);
+	          cstore_list.add(sitem);
+	          cursor.moveToNext();
 	        }		
 		  }catch(IllegalArgumentException e){
 			e.printStackTrace();
@@ -112,12 +117,12 @@ public class StoreList extends Activity {
 			dbHelper.onUpgrade(db, --DB_VERSION, DB_VERSION);
 		  }
 		  
-		for (int j=0; j<store_list.size(); j++)
+		for (int j=0; j<cstore_list.size(); j++)
 		{
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			//Log.i("VALUE", item.getWid());
-			map.put("ItemTitle", store_list.get(i).name);
-			map.put("ItemText",  store_list.get(i).id);
+			Log.i("VALUE", cstore_list.get(j).id);
+			map.put("ItemTitle", cstore_list.get(j).name);
+			map.put("ItemText",  cstore_list.get(j).id);
 			listitem.add(map);			
 		}
 		  

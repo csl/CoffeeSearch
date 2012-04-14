@@ -123,6 +123,7 @@ public class StoreView extends Activity {
 	          sitem.phone = cursor.getString(5);
 	          sitem.commit = cursor.getString(6);
 	          storeitem.add(sitem);
+	          cursor.moveToNext();
 	        }		
 		  }catch(IllegalArgumentException e){
 			e.printStackTrace();
@@ -130,12 +131,12 @@ public class StoreView extends Activity {
 			dbHelper.onUpgrade(db, --DB_VERSION, DB_VERSION);
 		  }
 		  
-		for (int j=0; j<store_list.size(); j++)
+		for (int j=0; j<storeitem.size(); j++)
 		{
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			//Log.i("VALUE", item.getWid());
-			map.put("ItemTitle", storeitem.get(i).sname + "/" + storeitem.get(i).time + "/" + storeitem.get(i).phone);
-			map.put("ItemText",  storeitem.get(i).addr);
+			map.put("ItemTitle", storeitem.get(j).sname + "/" + storeitem.get(j).time + "/" + storeitem.get(j).phone);
+			map.put("ItemText",  storeitem.get(j).addr);
 			listitem.add(map);			
 		}
 		  

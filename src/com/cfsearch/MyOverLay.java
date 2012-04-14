@@ -35,6 +35,8 @@ public class MyOverLay  extends Overlay {
     
     private boolean showWinInfo;
     
+    private String TAG = "MyOverLay";
+    
 	/**
 	 * It is used to track the visibility of information window and clicked location is known location or not 
 	 * of the currently selected Map Location
@@ -129,14 +131,18 @@ public class MyOverLay  extends Overlay {
     {
       Paint paint = new Paint();
       Point myScreenCoords = new Point();
-
-      mapView.getProjection().toPixels(mLocationViewers.nowGeoPoint, myScreenCoords);
-      paint.setStrokeWidth(1);
-      paint.setARGB(255, 255, 0, 0);
-      paint.setStyle(Paint.Style.STROKE);
-
-      canvas.drawBitmap(mNowIcon, myScreenCoords.x, myScreenCoords.y, paint);
-      canvas.drawText("現在位置", myScreenCoords.x, myScreenCoords.y, paint);
+      
+      if (mLocationViewers.nowGeoPoint != null)
+      {
+     
+	      mapView.getProjection().toPixels(mLocationViewers.nowGeoPoint, myScreenCoords);
+	      paint.setStrokeWidth(1);
+	      paint.setARGB(255, 255, 0, 0);
+	      paint.setStyle(Paint.Style.STROKE);
+	
+	      canvas.drawBitmap(mNowIcon, myScreenCoords.x, myScreenCoords.y, paint);
+	      canvas.drawText("現在位置", myScreenCoords.x, myScreenCoords.y, paint);
+      }
     }
 
     
@@ -144,9 +150,11 @@ public class MyOverLay  extends Overlay {
     {
         Paint paint = new Paint();
         Point myScreenCoords = new Point();
-
+        
+ 
         if (mLocationViewers.StoreGeoPoint != null)
         {
+            Log.i(TAG, "address find it");
 	        mapView.getProjection().toPixels(mLocationViewers.StoreGeoPoint, myScreenCoords);
 	        paint.setStrokeWidth(1);
 	        paint.setARGB(255, 255, 0, 0);
